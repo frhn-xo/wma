@@ -3,10 +3,10 @@ import React from 'react';
 const CardMain = () => {
   return (
     <div className="my-4">
-      <div className="flex text-slate-100">
+      <div className="flex text-slate-100 mt-5">
         <div className="text-9xl ">85</div>
         <div className="py-3">
-          <div className="text-5xl">.00%</div>
+          <div className="text-5xl">.05%</div>
           {/* <div className="text-5xl">%</div> */}
         </div>
       </div>

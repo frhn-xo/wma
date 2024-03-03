@@ -14,7 +14,7 @@ const Foot = () => {
         </a>
       </div>
       <div className="flex w-full justify-end items-end flex-col">
-        <span>developed by</span>
+        <span>made by</span>
         <a
           href={import.meta.env.VITE_FRHN_URL}
           target="_blank"
