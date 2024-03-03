@@ -1,0 +1,4 @@
+bg-slate-950
+
+add vite env var
+
