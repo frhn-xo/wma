@@ -5,17 +5,19 @@ const CardTop = () => {
   const attendanceData = useSelector((state) => state.user.attendanceData);
   const { scrpDate, scrpTime } = attendanceData || {};
   return (
-    <div className="flex justify-between text-md ">
-      <div className=" text-left w-fit">p {attendanceData?.pAttendance}</div>
-      <div className="flex-col w-fit">
-        {scrpDate && scrpTime && (
-          <>
+    <>
+      {attendanceData && (
+        <div className="flex justify-between text-md ">
+          <div className=" text-left w-fit">
+            p {attendanceData?.pAttendance}
+          </div>
+          <div className="flex-col w-fit">
             <div className=" text-right w-full">{scrpDate}</div>
             <div className="text-right w-full">{scrpTime}</div>
-          </>
-        )}
-      </div>
-    </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

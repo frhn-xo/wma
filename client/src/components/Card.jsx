@@ -5,6 +5,7 @@ import CardMain from './CardMain';
 import EditProfile from './EditProfile';
 import { useSelector, useDispatch } from 'react-redux';
 import { IoMdRefresh } from 'react-icons/io';
+import { FaBoltLightning } from 'react-icons/fa6';
 import { getDateTime } from '../utils/utils';
 import { setAttendance } from '../redux/userSlice';
 
@@ -19,7 +20,10 @@ const Card = () => {
 
   const [msg, setmsg] = useState({ show: false, text: '' });
 
+  const [btn, setBtn] = useState(false);
+
   const fetchAttendance = () => {
+    setBtn(true);
     setmsg({ show: true, text: '' });
     const socket = io(import.meta.env.VITE_API_URL);
     try {
@@ -33,6 +37,7 @@ const Card = () => {
         socket.disconnect();
         console.log('Error during sign-in:', data);
         setmsg((p) => ({ ...p, text: data }));
+        setBtn(false);
       });
 
       socket.on('scrpSucc', (data) => {
@@ -40,23 +45,25 @@ const Card = () => {
         setmsg((p) => ({ ...p, text: 'Success...' }));
 
         const dateTime = getDateTime();
-        console.log(dateTime);
 
         const newAttendanceData = {
           attendance: data,
           scrpDate: dateTime.formattedDate,
           scrpTime: dateTime.formattedTime,
-          pAttendance: attendanceData.attendance,
+          pAttendance: attendanceData?.attendance || '*',
         };
 
-        console.log('newAttendance ', newAttendanceData);
+        console.log('newAttendanceData:', newAttendanceData);
 
         dispatch(setAttendance(newAttendanceData));
+
+        setBtn(false);
       });
     } catch (error) {
       socket.disconnect();
       console.log('Error during sign-in:', error);
       setmsg((p) => ({ ...p, text: "Oops, I guess there's an error." }));
+      setBtn(false);
     }
   };
 
@@ -65,23 +72,29 @@ const Card = () => {
       {edit ? (
         <EditProfile />
       ) : (
-        <div className="bg-black w-full p-5 rounded-md bg-opacity-80 flex flex-col font-semibold h-96">
+        <div className="bg-black w-full p-5 rounded-md bg-opacity-80 flex flex-col font-semibold h-96 justify-between">
           <CardTop />
           <CardMain />
-          <div className="w-full text-center text-slate-100 h-10">
-            {msg.text}
+          <div className="w-full text-center text-slate-100">{msg.text}</div>
+          <div className="h-full">
+            {userData && (
+              <div className="flex justify-between items-end h-full">
+                <div className=" text-left w-fit">{userData?.collegeId}</div>
+                {!btn ? (
+                  <button
+                    className="p-2 bg-lime-300 text-black rounded-full font-bold mr-4 w-16 h-16 flex justify-center items-center hover:bg-slate-100"
+                    onClick={fetchAttendance}
+                  >
+                    <IoMdRefresh size={45} />
+                  </button>
+                ) : (
+                  <button className="p-2 bg-slate-100 text-black rounded-full font-bold mr-4 w-16 h-16 flex justify-center items-center">
+                    <FaBoltLightning size={37} />
+                  </button>
+                )}
+              </div>
+            )}
           </div>
-          {userData && (
-            <div className="flex justify-between items-end my-4">
-              <div className=" text-left w-fit">{userData?.collegeId}</div>
-              <button
-                className="p-2 bg-lime-300 text-black text-3xl rounded-full hover:bg-white font-bold mr-4"
-                onClick={fetchAttendance}
-              >
-                <IoMdRefresh size={45} />
-              </button>
-            </div>
-          )}
         </div>
       )}
     </>

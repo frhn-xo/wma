@@ -6,7 +6,6 @@ import { toggleEdit } from '../redux/userSlice';
 const Head = () => {
   const dispatch = useDispatch();
   const edit = useSelector((state) => state.user.edit);
-  // console.log(edit);
   const handleEdit = () => {
     dispatch(toggleEdit());
   };

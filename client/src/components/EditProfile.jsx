@@ -22,7 +22,6 @@ const EditProfile = () => {
 
   const submitDetails = (data) => {
     data.collegeId = data.collegeId.toLowerCase();
-    console.log(data);
     dispatch(setUser(data));
     dispatch(toggleEdit());
   };
@@ -83,12 +82,12 @@ const EditProfile = () => {
             {errors.collegeKey.message}
           </span>
         )}
-        <div className="flex justify-between mt-3.5 px-4 ">
+        <div className="flex justify-between mt-3.5 ">
           <button type="button" onClick={clearDetails}>
             {/* <MdDeleteOutline size={45} /> */}
           </button>
-          <button className="p-4 bg-black text-lime-300 text-3xl rounded-full hover:bg-blue-900 font-bold  w-fit">
-            <FaCheck size={30} />
+          <button className="p-4 bg-black text-lime-300 text-3xl rounded-lg hover:bg-blue-900 font-bold  w-fit mt-5 mr-1">
+            <FaCheck size={20} />
           </button>
         </div>
       </form>
