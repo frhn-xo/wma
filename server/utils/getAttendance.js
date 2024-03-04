@@ -19,9 +19,7 @@ const getAttendance = async ({ username, password, socket }) => {
 
   const page = await browser.newPage();
   try {
-    console.log(username, password);
-
-    await page.setViewport({ width: 1920, height: 1080 });
+    // await page.setViewport({ width: 1920, height: 1080 });
 
     socket.emit('scrp', 'Navigating to website...');
     await page.goto(websiteURL);
@@ -73,7 +71,7 @@ const getAttendance = async ({ username, password, socket }) => {
       throw new Error('Failed to retrieve attendance value.');
     }
 
-    socket.emit('scrpSucc', `Attendance: ${attendanceValue}`);
+    socket.emit('scrpSucc', `${attendanceValue}`);
 
     // await page.screenshot({
     //   path: path.join(imagesDirectory, `attend.png`),
@@ -83,6 +81,7 @@ const getAttendance = async ({ username, password, socket }) => {
   } catch (error) {
     socket.emit('scrpErr', `Error: ${error.message}`);
     await browser.close();
+    socket.disconnect();
   }
 };
 

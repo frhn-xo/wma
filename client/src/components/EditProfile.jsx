@@ -36,8 +36,8 @@ const EditProfile = () => {
 
   return (
     <div className="bg-lime-300 text-black w-full p-5 rounded-md bg-opacity-90 flex flex-col font-semibold h-96">
-      <div className="flex justify-between h-full mb-4">
-        <div className="text-5xl">*details</div>
+      <div className="flex justify-between h-20">
+        <div className="text-5xl">details</div>
       </div>
       <form
         onSubmit={handleSubmit(submitDetails)}
@@ -83,11 +83,11 @@ const EditProfile = () => {
             {errors.collegeKey.message}
           </span>
         )}
-        <div className="flex justify-between mt-4 px-4 ">
+        <div className="flex justify-between mt-3.5 px-4 ">
           <button type="button" onClick={clearDetails}>
-            <MdDeleteOutline size={45} />
+            {/* <MdDeleteOutline size={45} /> */}
           </button>
-          <button className="p-4 bg-black text-lime-300 text-3xl rounded-full hover:bg-blue-900 font-bold mr-4 w-fit">
+          <button className="p-4 bg-black text-lime-300 text-3xl rounded-full hover:bg-blue-900 font-bold  w-fit">
             <FaCheck size={30} />
           </button>
         </div>

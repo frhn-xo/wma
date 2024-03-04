@@ -5,11 +5,15 @@ import CardMain from './CardMain';
 import EditProfile from './EditProfile';
 import { useSelector, useDispatch } from 'react-redux';
 import { IoMdRefresh } from 'react-icons/io';
+import { getDateTime } from '../utils/utils';
+import { setAttendance } from '../redux/userSlice';
 
 const Card = () => {
   const dispatch = useDispatch();
 
   const userData = useSelector((state) => state.user.userData);
+
+  const attendanceData = useSelector((state) => state.user.attendanceData);
 
   const edit = useSelector((state) => state.user.edit);
 
@@ -20,17 +24,34 @@ const Card = () => {
     const socket = io(import.meta.env.VITE_API_URL);
     try {
       socket.emit('details', userData);
+
       socket.on('scrp', (data) => {
         setmsg((p) => ({ ...p, text: data }));
       });
+
       socket.on('scrpErr', (data) => {
         socket.disconnect();
         console.log('Error during sign-in:', data);
         setmsg((p) => ({ ...p, text: data }));
       });
+
       socket.on('scrpSucc', (data) => {
         socket.disconnect();
-        setmsg((p) => ({ ...p, text: data }));
+        setmsg((p) => ({ ...p, text: 'Success...' }));
+
+        const dateTime = getDateTime();
+        console.log(dateTime);
+
+        const newAttendanceData = {
+          attendance: data,
+          scrpDate: dateTime.formattedDate,
+          scrpTime: dateTime.formattedTime,
+          pAttendance: attendanceData.attendance,
+        };
+
+        console.log('newAttendance ', newAttendanceData);
+
+        dispatch(setAttendance(newAttendanceData));
       });
     } catch (error) {
       socket.disconnect();
@@ -47,11 +68,9 @@ const Card = () => {
         <div className="bg-black w-full p-5 rounded-md bg-opacity-80 flex flex-col font-semibold h-96">
           <CardTop />
           <CardMain />
-          {msg.show && (
-            <div className="my-4 w-full text-center text-slate-100 ">
-              {msg.text}
-            </div>
-          )}
+          <div className="w-full text-center text-slate-100 h-10">
+            {msg.text}
+          </div>
           {userData && (
             <div className="flex justify-between items-end my-4">
               <div className=" text-left w-fit">{userData?.collegeId}</div>

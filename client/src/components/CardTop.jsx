@@ -3,14 +3,15 @@ import { useSelector } from 'react-redux';
 
 const CardTop = () => {
   const attendanceData = useSelector((state) => state.user.attendanceData);
+  const { scrpDate, scrpTime } = attendanceData || {};
   return (
     <div className="flex justify-between text-md ">
-      <div className=" text-left w-fit">{attendanceData?.pAttendance}</div>
+      <div className=" text-left w-fit">p {attendanceData?.pAttendance}</div>
       <div className="flex-col w-fit">
-        {attendanceData?.scrpDate && (
+        {scrpDate && scrpTime && (
           <>
-            <div className=" text-right w-full">3 march sunday</div>
-            <div className="text-right w-full">2:00 am</div>
+            <div className=" text-right w-full">{scrpDate}</div>
+            <div className="text-right w-full">{scrpTime}</div>
           </>
         )}
       </div>

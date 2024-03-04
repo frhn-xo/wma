@@ -18,7 +18,6 @@ const io = new Server(httpServer, {
 const onConnection = (socket) => {
   console.log(`User connected with ID: ${socket.id}`);
   socket.on('details', async ({ collegeId, collegeKey }) => {
-    console.log('details', collegeId, collegeKey);
     try {
       await getAttendance({
         username: collegeId,
@@ -27,6 +26,7 @@ const onConnection = (socket) => {
       });
     } catch (error) {
       console.log('error', error);
+      socket.disconnect();
     }
   });
   socket.on('disconnect', () => {
