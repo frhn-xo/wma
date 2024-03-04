@@ -17,8 +17,13 @@ const userSlice = createSlice({
     toggleEdit: (state) => {
       state.edit = !state.edit;
     },
+    removeUser: (state) => {
+      state.userData = null;
+      state.attendanceData = null;
+    },
   },
 });
 
-export const { setUser, setAttendance, toggleEdit } = userSlice.actions;
+export const { setUser, setAttendance, toggleEdit, removeUser } =
+  userSlice.actions;
 export default userSlice.reducer;
