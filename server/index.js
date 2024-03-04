@@ -2,6 +2,7 @@ import http from 'http';
 import { Server } from 'socket.io';
 import dotenv from 'dotenv';
 import { getAttendance } from './utils/getAttendance.js';
+import { log } from 'console';
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ const io = new Server(httpServer, {
 const onConnection = (socket) => {
   console.log(`User connected with ID: ${socket.id}`);
   socket.on('details', async ({ collegeId, collegeKey }) => {
+    console.log('details', collegeId, collegeKey);
     try {
       await getAttendance({
         username: collegeId,
