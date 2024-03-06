@@ -4,7 +4,7 @@ const Foot = () => {
   return (
     <div className="flex text-xs ">
       <div className="flex w-full justify-start items-start flex-col">
-        <span>wrapper abstraction over </span>
+        <span>wrapper over </span>
         <a
           href={import.meta.env.VITE_VIIT_URL}
           target="_black"
