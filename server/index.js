@@ -2,7 +2,6 @@ import http from 'http';
 import { Server } from 'socket.io';
 import dotenv from 'dotenv';
 import { getAttendance } from './utils/getAttendance.js';
-import { log } from 'console';
 
 dotenv.config();
 

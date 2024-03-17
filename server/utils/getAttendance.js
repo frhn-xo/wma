@@ -15,6 +15,8 @@ const websiteURL = process.env.VIIT_URL;
 const attendanceIframeURL = process.env.ATTENDANCE_URL;
 
 const getAttendance = async ({ username, password, socket }) => {
+  //testing
+  // const browser = await puppeteer.launch({ headless: false });
   const browser = await puppeteer.launch();
 
   const page = await browser.newPage();
