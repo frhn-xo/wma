@@ -17,8 +17,10 @@ const attendanceIframeURL = process.env.ATTENDANCE_URL;
 const getAttendance = async ({ username, password, socket }) => {
   //testing
   // const browser = await puppeteer.launch({ headless: false });
-  const browser = await puppeteer.launch();
-
+  const browser = await puppeteer.launch({
+    executablePath: '/usr/bin/chromium-browser',
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
   const page = await browser.newPage();
   try {
     // await page.setViewport({ width: 1920, height: 1080 });
