@@ -7,7 +7,7 @@ WMA/WHAT'S MY ATTENDANCE? is a web app for fetching attendance from the college 
 [WMA/WHAT'S MY ATTENDANCE? Website](https://wma.onrender.com/)
 
 
-![wmasc](https://github.com/frhn-xo/wma/assets/133597008/4bcfb46b-c94b-4c95-ba65-eb921f34eb71)
+![wmasc](https://github.com/frhn-xo/wma/assets/133597008/998dd187-b96b-45d9-bac0-58f3039bf8ba)
 
 
 ## Notable Technologies Used
