@@ -17,10 +17,13 @@ const attendanceIframeURL = process.env.ATTENDANCE_URL;
 const getAttendance = async ({ username, password, socket }) => {
   //testing
   // const browser = await puppeteer.launch({ headless: false });
+
+  // production
   const browser = await puppeteer.launch({
     executablePath: '/usr/bin/chromium-browser',
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
   });
+
   const page = await browser.newPage();
   try {
     // await page.setViewport({ width: 1920, height: 1080 });
@@ -63,13 +66,18 @@ const getAttendance = async ({ username, password, socket }) => {
 
     // await delay(1500);
 
-    const elementSelector =
-      '#tblReport > table > tbody > tr:nth-child(3) > td > table > tbody > tr:nth-child(22) > td:nth-child(4)';
+    const elements = await page.$$('.reportHeading2WithBackground');
 
-    const attendanceValue = await page.evaluate((selector) => {
-      const element = document.querySelector(selector);
-      return element ? element.innerHTML : null;
-    }, elementSelector);
+    const lastrow = elements[elements.length - 1];
+
+    const lastChild = await lastrow.$(':last-child');
+
+    const attendanceValue = await page.evaluate(
+      (lastChild) => lastChild.innerHTML,
+      lastChild
+    );
+
+    console.log(attendanceValue);
 
     if (attendanceValue === null) {
       throw new Error('Failed to retrieve attendance value.');
