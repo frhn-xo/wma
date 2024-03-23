@@ -22,12 +22,22 @@ const CardMain = () => {
       ) : userData ? (
         <div className="flex text-slate-100 items-center mt-10">
           <div className="text-7xl pr-4">{':)'}</div>
-          <div className="text-2xl">ayo, let's go!</div>
+          <div className="text-2xl flex-col">
+            <div>ayo, let's go!</div>
+            <div className="text-lime-300 text-sm">
+              {'( bottom fetch button )'}
+            </div>
+          </div>
         </div>
       ) : (
         <div className="flex text-slate-100 items-center mt-10">
           <div className="text-7xl pr-4">{':('}</div>
-          <div className="text-2xl">enter yo details</div>
+          <div className="text-2xl flex-col">
+            <div>enter yo details</div>
+            <div className="text-lime-300 text-sm">
+              {'( top right edit button )'}
+            </div>
+          </div>
         </div>
       )}
     </div>

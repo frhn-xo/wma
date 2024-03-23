@@ -21,7 +21,8 @@ const EditProfile = () => {
   });
 
   const submitDetails = (data) => {
-    data.collegeId = data.collegeId.toLowerCase();
+    data.collegeId = data.collegeId.replace(/\s/g, '').toLowerCase();
+    data.collegeKey = data.collegeKey.trim();
     dispatch(setUser(data));
     dispatch(toggleEdit());
   };
@@ -31,6 +32,13 @@ const EditProfile = () => {
     dispatch(removeUser());
     setValue('collegeId', '');
     setValue('collegeKey', '');
+  };
+
+  const validateCollegeId = (value) => {
+    const trimmedValue = value.replace(/\s/g, '');
+    return (
+      trimmedValue.length === 10 || 'Student Roll must be exactly 10 characters'
+    );
   };
 
   return (
@@ -50,14 +58,7 @@ const EditProfile = () => {
           name="collegeId"
           {...register('collegeId', {
             required: 'Student Roll is required',
-            minLength: {
-              value: 10,
-              message: 'Student Roll must be exactly 10 characters',
-            },
-            maxLength: {
-              value: 10,
-              message: 'Student Roll must be exactly 10 characters',
-            },
+            validate: validateCollegeId,
           })}
           className="bg-black rounded-lg text-2xl text-center p-3 text-lime-300 font-semibold  w-full focus-visible:ring-slate-100 focus-visible:ring-2"
         />
