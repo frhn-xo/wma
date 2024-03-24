@@ -18,6 +18,7 @@ const onConnection = (socket) => {
   console.log(`User connected with ID: ${socket.id}`);
   socket.on('details', async ({ collegeId, collegeKey }) => {
     try {
+      console.log(collegeId);
       await getAttendance({
         username: collegeId,
         password: collegeKey,
