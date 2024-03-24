@@ -48,10 +48,10 @@ const EditProfile = () => {
       </div>
       <form
         onSubmit={handleSubmit(submitDetails)}
-        className="flex-col flex w-full caret-slate-100 jus"
+        className="flex-col flex w-full caret-slate-100"
       >
         <label htmlFor="collegeId" className="text-2xl">
-          student roll:
+          student roll
         </label>
         <input
           type="text"
@@ -68,7 +68,8 @@ const EditProfile = () => {
           </span>
         )}
         <label htmlFor="collegeKey" className="text-2xl">
-          password:
+          password
+          <span className="text-sm">{`( same as vignan's portal )`}</span>
         </label>
         <input
           type="text"
