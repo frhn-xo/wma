@@ -24,7 +24,7 @@ const Card = () => {
 
   const fetchAttendance = () => {
     setBtn(true);
-    setmsg({ show: true, text: '' });
+    setmsg({ show: true, text: 'Please wait, connecting' });
     const socket = io(import.meta.env.VITE_API_URL);
     try {
       socket.emit('details', userData);
